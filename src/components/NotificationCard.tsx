@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   ImageSourcePropType,
@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import {COLORS} from '../utils/color';
-import {CommentDislike, MoreIcon} from './Svgs';
+import {CommentDislike, CommentLike, MoreIcon} from './Svgs';
 
 interface NotificationCardProps {
   avatar: ImageSourcePropType;
@@ -22,6 +22,7 @@ const NotificationCard = ({
   titleActive,
   title,
 }: NotificationCardProps): JSX.Element => {
+  const [like, setLike] = useState<boolean>(false);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -39,8 +40,12 @@ const NotificationCard = ({
       </View>
 
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.icon}>
-          <CommentDislike />
+        <TouchableOpacity
+          style={styles.icon}
+          onPress={() => {
+            setLike(!like);
+          }}>
+          {!like ? <CommentLike /> : <CommentDislike />}
         </TouchableOpacity>
 
         <Text style={styles.description}>{comment}</Text>

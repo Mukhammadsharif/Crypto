@@ -8,6 +8,8 @@ import {
   Image,
   TextInput,
   ImageBackground,
+  ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {COLORS} from '../utils/color';
@@ -43,86 +45,91 @@ const EditProfileModal = ({
   };
 
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <Modal animationType="slide" transparent={false} visible={modalVisible}>
         <View style={styles.centeredView}>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.headerButton}>Cancel</Text>
-            </TouchableOpacity>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.header}>
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={styles.headerButton}>Cancel</Text>
+              </TouchableOpacity>
 
-            <Text style={styles.editTiTle}>Edit profile</Text>
+              <Text style={styles.editTiTle}>Edit profile</Text>
 
-            <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.headerButton}>Save</Text>
-            </TouchableOpacity>
-          </View>
+              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                <Text style={styles.headerButton}>Save</Text>
+              </TouchableOpacity>
+            </View>
 
-          {background ? (
-            <ImageBackground
-              resizeMode={'cover'}
-              source={{uri: background}}
-              style={styles.imageBackground}>
-              <TouchableOpacity onPress={() => pickBackground()}>
+            {background ? (
+              <ImageBackground
+                resizeMode={'cover'}
+                source={{uri: background}}
+                style={styles.imageBackground}>
+                <TouchableOpacity onPress={() => pickBackground()}>
+                  <SettingsAddPhotoIcon />
+                </TouchableOpacity>
+              </ImageBackground>
+            ) : (
+              <TouchableOpacity
+                onPress={() => pickBackground()}
+                style={styles.imageBackgroundContainer}>
                 <SettingsAddPhotoIcon />
               </TouchableOpacity>
-            </ImageBackground>
-          ) : (
-            <TouchableOpacity
-              onPress={() => pickBackground()}
-              style={styles.imageBackgroundContainer}>
-              <SettingsAddPhotoIcon />
-            </TouchableOpacity>
-          )}
+            )}
 
-          <View style={styles.mainContainer}>
-            <View style={styles.avatarContainer}>
-              <TouchableOpacity
-                onPress={() => pickImage()}
-                style={styles.avatarImageContainer}>
-                <Image
-                  source={avatar ? {uri: avatar} : Avatar}
-                  style={styles.avatar}
+            <View style={styles.mainContainer}>
+              <View style={styles.avatarContainer}>
+                <TouchableOpacity
+                  onPress={() => pickImage()}
+                  style={styles.avatarImageContainer}>
+                  <Image
+                    source={avatar ? {uri: avatar} : Avatar}
+                    style={styles.avatar}
+                  />
+                  <SettingsAddPhotoIcon style={styles.icon} />
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.textContainer}>
+                <Text style={styles.title}>Name Profile</Text>
+                <TextInput
+                  value={profile}
+                  onChangeText={setProfile}
+                  style={styles.input}
                 />
-                <SettingsAddPhotoIcon style={styles.icon} />
-              </TouchableOpacity>
-            </View>
+              </View>
 
-            <View style={styles.textContainer}>
-              <Text style={styles.title}>Name Profile</Text>
-              <TextInput
-                value={profile}
-                onChangeText={setProfile}
-                style={styles.input}
-              />
-            </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.title}>Name</Text>
+                <TextInput
+                  value={name}
+                  onChangeText={setName}
+                  style={styles.input}
+                />
+              </View>
 
-            <View style={styles.textContainer}>
-              <Text style={styles.title}>Name</Text>
-              <TextInput
-                value={name}
-                onChangeText={setName}
-                style={styles.input}
-              />
+              <View style={styles.textContainer}>
+                <Text style={styles.title}>Status</Text>
+                <TextInput
+                  value={status}
+                  onChangeText={setStatus}
+                  style={styles.input}
+                  placeholder={'Add status'}
+                />
+              </View>
             </View>
-
-            <View style={styles.textContainer}>
-              <Text style={styles.title}>Status</Text>
-              <TextInput
-                value={status}
-                onChangeText={setStatus}
-                style={styles.input}
-                placeholder={'Add status'}
-              />
-            </View>
-          </View>
+          </ScrollView>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   centeredView: {
     flex: 1,
     justifyContent: 'center',

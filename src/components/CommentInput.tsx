@@ -1,4 +1,4 @@
-import React, {SetStateAction} from 'react';
+import React, {SetStateAction, useState} from 'react';
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -7,7 +7,12 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import {CommentInputLike, CommentInputSendIcon} from './Svgs';
+import {
+  CommentDislike,
+  CommentInputLike,
+  CommentInputSendIcon,
+  CommentLike,
+} from './Svgs';
 import {COLORS} from '../utils/color';
 
 interface CommentInputProps {
@@ -24,13 +29,18 @@ const CommentInput = ({
   setCommentToggle,
 }: CommentInputProps): JSX.Element => {
   const [text, onChangeText] = React.useState<string>('Non');
+  const [like, setLike] = useState<boolean>(false);
   return (
     <KeyboardAvoidingView
       enabled={true}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <View style={[styles.container, {paddingHorizontal}]}>
-        <TouchableOpacity style={styles.iconContainer}>
-          <CommentInputLike />
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => {
+            setLike(!like);
+          }}>
+          {!like ? <CommentLike /> : <CommentDislike />}
         </TouchableOpacity>
 
         <TextInput

@@ -15,16 +15,12 @@ interface ImageCommentCardProps {
   titleActive: string;
   title: string;
   description: string;
-  commentToggle: boolean;
-  setCommentToggle: React.Dispatch<SetStateAction<boolean>>;
 }
 const ImageCommentCard = ({
   avatar,
   titleActive,
   title,
   description,
-  commentToggle,
-  setCommentToggle,
 }: ImageCommentCardProps): JSX.Element => {
   const [like, setLike] = useState<boolean>(false);
   return (
@@ -38,10 +34,7 @@ const ImageCommentCard = ({
             <Text style={styles.title}>{title}</Text>
           </View>
 
-          <TouchableOpacity
-            onPress={() => {
-              setCommentToggle(!commentToggle);
-            }}>
+          <TouchableOpacity onPress={() => {}}>
             <MoreIcon />
           </TouchableOpacity>
         </View>
@@ -51,7 +44,7 @@ const ImageCommentCard = ({
             onPress={() => {
               setLike(!like);
             }}>
-            {like ? <CommentLike /> : <CommentDislike />}
+            {!like ? <CommentLike /> : <CommentDislike />}
           </TouchableOpacity>
 
           <Text style={styles.description}>{description}</Text>

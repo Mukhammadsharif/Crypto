@@ -12,7 +12,6 @@ const CustomModal = ({
   modalVisible,
   setModalVisible,
 }: CustomModalProps): JSX.Element => {
-  const [keyboard, setKeyboard] = useState<boolean>(false);
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -24,11 +23,8 @@ const CustomModal = ({
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            {keyboard ? <CommentInput /> : ''}
             <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                onPress={() => setKeyboard(true)}
-                style={styles.mailContainer}>
+              <TouchableOpacity style={styles.mailContainer}>
                 <ModalMailIcon />
               </TouchableOpacity>
 

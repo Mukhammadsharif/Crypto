@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
-import ProfileImage from '../components/ProfileImage';
+import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
 import {COLORS} from '../utils/color';
 import {ExportIcon} from '../components/Svgs';
 import ImageCommentCard from '../components/ImageCommentCard';
 import Avatar1 from '../assets/images/Avatar3.png';
 import Avatar2 from '../assets/images/Avatar2.png';
 import Avatar3 from '../assets/images/Avatar1.png';
+import ProfileDetailImage from '../components/ProfileDetailImage';
 
 const NFTImageDetail = (): JSX.Element => {
   const [commentToggle, setCommentToggle] = useState<boolean>(false);
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <ProfileImage
+        <ProfileDetailImage
           rightFirstIcon={<ExportIcon />}
           comment={commentToggle}
           commentToggle={commentToggle}
@@ -27,8 +27,6 @@ const NFTImageDetail = (): JSX.Element => {
           description={
             'Sometimes we face a problem that turns out to be more vicious than we imagined...'
           }
-          commentToggle={commentToggle}
-          setCommentToggle={setCommentToggle}
         />
 
         <ImageCommentCard
@@ -38,8 +36,6 @@ const NFTImageDetail = (): JSX.Element => {
           description={
             'Sometimes we face a problem that turns out to be more vicious than we imagined...'
           }
-          commentToggle={commentToggle}
-          setCommentToggle={setCommentToggle}
         />
 
         <ImageCommentCard
@@ -49,8 +45,6 @@ const NFTImageDetail = (): JSX.Element => {
           description={
             'Sometimes we face a problem that turns out to be more vicious than we imagined...'
           }
-          commentToggle={commentToggle}
-          setCommentToggle={setCommentToggle}
         />
       </ScrollView>
     </SafeAreaView>
